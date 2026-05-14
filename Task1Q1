@@ -1,0 +1,32 @@
+int voltpin=A2;
+float volt;
+int ledpin=8;
+
+// i used a photoresistor with a normal resistance in series with it..
+// then i measured the potential drops a/c the normal resistnace as i varied the light from lowest to highest possible value
+//which turned out to be (6/1023)*5v and (679/1023)*5v
+void setup()
+{
+ pinMode(voltpin,INPUT);
+ Serial.begin(9600);
+  pinMode(ledpin,OUTPUT);
+}
+
+void loop()
+{
+  float val=analogRead(voltpin);
+  volt=(val/1023)*5;
+  Serial.print(volt);
+  Serial.print("   ");
+  Serial.println(val);
+  if(val<400){
+    digitalWrite(ledpin,HIGH);
+  }
+  else{
+    digitalWrite(ledpin,LOW);
+  }
+  
+  
+  delay(100);
+
+}
